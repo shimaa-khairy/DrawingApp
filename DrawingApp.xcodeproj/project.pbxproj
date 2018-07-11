@@ -16,6 +16,7 @@
 		6DDE565820F5571100787FF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE565720F5571100787FF7 /* main.m */; };
 		6DDE566220F5571200787FF7 /* DrawingAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE566120F5571200787FF7 /* DrawingAppTests.m */; };
 		6DDE566D20F5571200787FF7 /* DrawingAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE566C20F5571200787FF7 /* DrawingAppUITests.m */; };
+		6DDE568220F66C0300787FF7 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE568120F66C0300787FF7 /* DrawingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		6DDE566820F5571200787FF7 /* DrawingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DDE566C20F5571200787FF7 /* DrawingAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawingAppUITests.m; sourceTree = "<group>"; };
 		6DDE566E20F5571200787FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DDE568020F66C0300787FF7 /* DrawingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
+		6DDE568120F66C0300787FF7 /* DrawingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +106,10 @@
 		6DDE564420F5570400787FF7 /* DrawingApp */ = {
 			isa = PBXGroup;
 			children = (
+				6DDE567D20F6674B00787FF7 /* Storyboard */,
+				6DDE567C20F6673C00787FF7 /* Viewcontroller */,
 				6DDE564520F5570400787FF7 /* AppDelegate.h */,
 				6DDE564620F5570400787FF7 /* AppDelegate.m */,
-				6DDE564820F5570400787FF7 /* ViewController.h */,
-				6DDE564920F5570400787FF7 /* ViewController.m */,
-				6DDE564B20F5570400787FF7 /* Main.storyboard */,
 				6DDE565120F5571100787FF7 /* Assets.xcassets */,
 				6DDE565320F5571100787FF7 /* LaunchScreen.storyboard */,
 				6DDE565620F5571100787FF7 /* Info.plist */,
@@ -133,6 +135,25 @@
 				6DDE566E20F5571200787FF7 /* Info.plist */,
 			);
 			path = DrawingAppUITests;
+			sourceTree = "<group>";
+		};
+		6DDE567C20F6673C00787FF7 /* Viewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				6DDE564820F5570400787FF7 /* ViewController.h */,
+				6DDE564920F5570400787FF7 /* ViewController.m */,
+				6DDE568020F66C0300787FF7 /* DrawingViewController.h */,
+				6DDE568120F66C0300787FF7 /* DrawingViewController.m */,
+			);
+			path = Viewcontroller;
+			sourceTree = "<group>";
+		};
+		6DDE567D20F6674B00787FF7 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				6DDE564B20F5570400787FF7 /* Main.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DDE568220F66C0300787FF7 /* DrawingViewController.m in Sources */,
 				6DDE564A20F5570400787FF7 /* ViewController.m in Sources */,
 				6DDE565020F5570400787FF7 /* DrawingApp.xcdatamodeld in Sources */,
 				6DDE565820F5571100787FF7 /* main.m in Sources */,
