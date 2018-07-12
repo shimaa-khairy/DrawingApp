@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DrawingViewController : UIViewController
+@interface DrawingViewController : UIViewController <UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
 @property (copy) UIImage *tempUndoImage;

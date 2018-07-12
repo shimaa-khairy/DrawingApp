@@ -16,6 +16,7 @@
 CGFloat lineThickness = 10.0;
 bool dot ;
 CGPoint lastPoint ;
+UIImagePickerController *imagePicker;
 - (void)viewDidLoad {
     [super viewDidLoad];
     _tempUndoImage = [UIImage new];
@@ -126,6 +127,25 @@ CGPoint lastPoint ;
 - (IBAction)saveImage:(UIButton *)sender {
 }
 
+/// open image to draw on it 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.mainImageView.image = chosenImage;
+    
+    [imagePicker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [imagePicker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
 - (IBAction)openImage:(UIButton *)sender {
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES ;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePicker animated:YES completion:NULL];
 }
 @end
