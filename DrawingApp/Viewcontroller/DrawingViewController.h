@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface DrawingViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
-
-@property (weak, nonatomic) IBOutlet UIImageView *tempImageView;
-
+@property (copy) UIImage *tempUndoImage;
+@property (copy) UIImage *tempRedoImage;
 @property (strong, nonatomic) UIColor *color;
 - (IBAction)colorPressed:(UIButton *)sender;
+- (IBAction)undoAction:(UIBarButtonItem *)sender;
+- (IBAction)redoAction:(UIBarButtonItem *)sender;
 - (IBAction)lineThicknessPressed:(UIButton *)sender;
 - (IBAction)eraseDrawing:(UIButton *)sender;
 
 - (IBAction)saveImage:(UIButton *)sender;
 - (IBAction)openImage:(UIButton *)sender;
 
+-(void) drawLineFrom: (CGPoint)fromPoint : (CGPoint)toPoint;
 @end

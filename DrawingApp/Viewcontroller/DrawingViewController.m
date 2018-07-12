@@ -13,11 +13,13 @@
 @end
 
 @implementation DrawingViewController
-int lineThickness = 10;
+CGFloat lineThickness = 10.0;
 bool dot ;
 CGPoint lastPoint ;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _tempUndoImage = [UIImage new];
+    _tempRedoImage = [UIImage new];
     _color = UIColor.redColor;
     
     // Do any additional setup after loading the view.
@@ -29,18 +31,41 @@ CGPoint lastPoint ;
 }
 //begin drawing
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-     dot = true ;
+    dot = true ;
     UITouch *touch = [touches anyObject];
     lastPoint = [touch locationInView:self.view];
+    _tempUndoImage = _mainImageView.image;
 }
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     dot = false ;
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];
+    [self drawLineFrom :lastPoint : currentPoint];
+    lastPoint = currentPoint;
+}
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (dot){
+        [self drawLineFrom : lastPoint :lastPoint];
+    }
+    
+   
 }
 //drawing Line
 -(void) drawLineFrom: (CGPoint)fromPoint : (CGPoint)toPoint{
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [self.mainImageView.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), fromPoint.x, fromPoint.y);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), toPoint.x, toPoint.y);
+    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), lineThickness );
+   
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), CGColorGetComponents( _color.CGColor)[0],CGColorGetComponents( _color.CGColor)[1],CGColorGetComponents( _color.CGColor)[2],CGColorGetComponents( _color.CGColor)[3]);
+    CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
     
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    self.mainImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    [self.mainImageView setAlpha:1.0];
+    UIGraphicsEndImageContext();
 }
 // change color value
 - (IBAction)colorPressed:(UIButton *)sender {
@@ -63,6 +88,12 @@ CGPoint lastPoint ;
         case 6:
             _color = UIColor.brownColor;
             break;
+        case 7:
+            _color = [UIColor colorWithRed:255/255.0f
+                                     green:255/255.0f
+                                      blue:255/255.0f
+                                     alpha:1.0f];
+            break;
             
         default:
             break;
@@ -71,11 +102,20 @@ CGPoint lastPoint ;
     
 }
 
+- (IBAction)undoAction:(UIBarButtonItem *)sender {
+    _tempRedoImage = _mainImageView.image;
+    _mainImageView.image = _tempUndoImage;
+}
+
+- (IBAction)redoAction:(UIBarButtonItem *)sender {
+    _mainImageView.image = _tempRedoImage;
+}
+
 - (IBAction)lineThicknessPressed:(UIButton *)sender {
     if (sender.tag == 1){
-        lineThickness = 10;
+        lineThickness = 10.0;
     }else{
-        lineThickness = 20;
+        lineThickness = 20.0;
     }
 }
 
